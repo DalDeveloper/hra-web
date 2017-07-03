@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { DataTableModule,SharedModule } from 'primeng/primeng';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -26,8 +25,6 @@ export function HttpLoaderFactory(http: Http) {
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        DataTableModule,
-        SharedModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {

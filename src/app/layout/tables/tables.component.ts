@@ -27,33 +27,22 @@ export class TablesComponent implements OnInit {
         this.EmployeeService.getEmployeeList().then(employees => this.employees = employees);
         console.log(this.employees);
         this.cols = [
-            {field: 'empId', header: 'empId'},
-            {field: 'name', header: 'name'},
-            {field: 'surname', header: 'surname'},
-            {field: 'gender', header: 'gender'},
-            {field: 'dob', header: 'dob'},
-            {field: 'doj', header: 'doj'},
-            {field: 'age', header: 'age'},
-            {field: 'email', header: 'email'}
+            {field: 'empId', header: 'empId', style: "{'width':'250px'}"},
+            {field: 'name', header: 'name', style: "{'width':'250px'}"},
+            {field: 'surname', header: 'surname', style: "{'width':'250px'}"},
+            {field: 'gender', header: 'gender', style: "{'width':'250px'}"},
+            {field: 'dob', header: 'dob', style: "{'width':'250px'}"},
+            {field: 'doj', header: 'doj', style: "{'width':'250px'}"},
+            {field: 'age', header: 'age', style: "{'width':'250px'}"},
+            {field: 'email', header: 'email', style: "{'width':'250px'}"},
+            {field: 'mobile', header: 'mobile', style: "{'width':'250px'}"},
+            {field: 'address', header: 'address', style: "{'width':'250px'}"},
+            {field: 'bgroup', header: 'bgroup', style: "{'width':'250px'}"},
+            {field: 'image', header: 'image', style: "{'width':'250px'}"},
+            {field: 'designation', header: 'designation', style: "{'width':'250px'}"},
+            {field: 'exp', header: 'exp', style: "{'width':'250px'}"},
+            {field: 'pan_no', header: 'PAN', style: "{'width':'250px'}"},
+            {field: 'status', header: 'status', style: "{'width':'250px'}"}
         ];
-
-        /*  
-            empId: String,
-            name: String,
-            surname: String,
-            gender: String,
-            dob: String,
-            doj: String,
-            age: Number,
-            email: String,
-            mobile: String,
-            address: String,
-            bgroup: String,
-            image: String,
-            designation: String,
-            exp: Number,
-            pan_no: String,
-            status: String
-        */
     }
 }

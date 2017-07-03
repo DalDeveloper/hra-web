@@ -7,7 +7,7 @@
                    Employees:
                 </div>
                 <div class="card-block table-responsive">
-                   <p-dataTable [value]="employees">
+                   <p-dataTable [value]="employees" scrollable="true" [tableStyle]="{'table-layout':'auto'}">
                         <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
                    </p-dataTable>
                 </div>
