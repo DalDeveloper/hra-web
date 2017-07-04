@@ -17,10 +17,11 @@ import {EmployeeService} from '../../services/employee.service';
     animations: [routerTransition()],
     providers: [EmployeeService]
 })
+
 export class TablesComponent implements OnInit {
     displayDialog: boolean;
 
-    employee: Employee = new EmployeeLocal();
+    employee: Employee = new PrimeEmployee();
     
     selectedEmployee: Employee;
     
@@ -28,15 +29,37 @@ export class TablesComponent implements OnInit {
 
     employees: Employee[];
 
+    cols: any[];
+    
     constructor(private employeeService: EmployeeService) { }
 
     ngOnInit() {
         this.employeeService.getEmployeeList().then(employees => this.employees = employees);
+
+        this.cols = [
+            {field: 'empId', header: 'empId'},
+            {field: 'name', header: 'name'},
+            {field: 'surname', header: 'surname'},
+            {field: 'gender', header: 'gender'},
+            {field: 'dob', header: 'dob'},
+            {field: 'doj', header: 'doj'},
+            {field: 'age', header: 'age'},
+            {field: 'email', header: 'email'},
+            {field: 'mobile', header: 'mobile'},
+            {field: 'address', header: 'address'},
+            {field: 'bgroup', header: 'bgroup'},
+            {field: 'image', header: 'image'},
+            {field: 'designation', header: 'designation'},
+            {field: 'exp', header: 'exp'},
+            {field: 'pan_no', header: 'PAN'},
+            {field: 'status', header: 'status'}
+        ];
     }
+    
     
     showDialogToAdd() {
         this.newEmployee = true;
-        this.employee = new EmployeeLocal();
+        this.employee = new PrimeEmployee();
         this.displayDialog = true;
     }
     
@@ -66,7 +89,7 @@ export class TablesComponent implements OnInit {
     }
     
     cloneCar(e: Employee): Employee {
-        let employee = new EmployeeLocal();
+        let employee = new PrimeEmployee();
         for(let prop in e) {
             employee[prop] = e[prop];
         }
@@ -77,30 +100,13 @@ export class TablesComponent implements OnInit {
         return this.employees.indexOf(this.selectedEmployee);
     }
 }
+ 
+
+class PrimeEmployee implements Employee {
     
-class EmployeeLocal implements Employee {
-    
-    constructor(
-        public empId?, 
-        public name?, 
-        public surname?, 
-        public gender?,
-        public dob?, 
-        public doj?, 
-        public age?, 
-        public email?,
-        public mobile?, 
-        public address?, 
-        public bgroup?, 
-        public image?, 
-        public designation?, 
-        public exp?,
-        public pan_no?, 
-        public status?
-    ) {}
+    constructor(public empId?, public name?, public surname?, public gender?, public dob?, public doj?, public age?, public email?, public mobile?, public address?, public bgroup?, public image?, public designation?, public exp?, public pan_no?, public status?) {}
     
 }
-
 
 /*
  import { Component, OnInit } from '@angular/core';

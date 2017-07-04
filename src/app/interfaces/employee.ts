@@ -15,4 +15,5 @@ export interface Employee {
 	exp?;
 	pan_no?;
 	status?;
+	
 }
