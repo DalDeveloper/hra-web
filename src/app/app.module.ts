@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { CalendarModule} from 'primeng/primeng';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
 //     for development
@@ -22,6 +23,7 @@ export function HttpLoaderFactory(http: Http) {
     ],
     imports: [
         BrowserModule,
+        CalendarModule,
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,

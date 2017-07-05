@@ -31,6 +31,7 @@ export class TablesComponent implements OnInit {
 
     cols: any[];
     
+    empDate: Date;
     constructor(private employeeService: EmployeeService) { }
 
     ngOnInit() {
@@ -65,10 +66,15 @@ export class TablesComponent implements OnInit {
     
     save() {
         let employees = [...this.employees];
-        if(this.newEmployee)
+        
+        if(this.newEmployee){ 
             employees.push(this.employee);
-        else
+            this.employeeService.addEmployee(this.employee);
+        }
+        else{
             employees[this.findSelectedCarIndex()] = this.employee;
+            this.employeeService.addEmployee(this.employee);
+        }
         
         this.employees = employees;
         this.employee = null;
@@ -96,7 +102,7 @@ export class TablesComponent implements OnInit {
         return employee;
     }
     
-    findSelectedCarIndex(): number {
+    findSelectedCarIndex(): number { 
         return this.employees.indexOf(this.selectedEmployee);
     }
 }
