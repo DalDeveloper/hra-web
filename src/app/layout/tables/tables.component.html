@@ -17,8 +17,14 @@
     </div>
 </div>
 
-<p-dialog header="Employee Details" [contentStyle]="{'overflow':'scroll'}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+<p-dialog header="Employee Details" [contentStyle]="{'overflow':'scroll-y'}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
+    
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="employee">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-8"><img src="http://localhost:4200/assets/images/he.jpg" alt="" width="150" height="150"></div>
+            <div class="ui-grid-col-4"><p-fileUpload mode="basic" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)"></p-fileUpload></div>
+        </div>
+        <hr>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="empId">Emp Id</label></div>
             <div class="ui-grid-col-8"><input pInputText id="empId" [(ngModel)]="employee.empId" /></div>
@@ -59,10 +65,10 @@
             <div class="ui-grid-col-4"><label for="bgroup">Bgroup</label></div>
             <div class="ui-grid-col-8"><input pInputText id="bgroup" [(ngModel)]="employee.bgroup" /></div>
         </div>
-        <div class="ui-grid-row">
+        <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="image">Image</label></div>
             <div class="ui-grid-col-8"><input pInputText id="image" [(ngModel)]="employee.image" /></div>
-        </div>
+        </div>-->
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="designation">Designation</label></div>
             <div class="ui-grid-col-8"><input pInputText id="designation" [(ngModel)]="employee.designation" /></div>

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule}   from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 
 import { TablesComponent } from './tables.component';
 import { TablesRoutingModule } from './tables-routing.module';
 import { PageHeaderModule } from './../../shared';
-import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,CalendarModule,InputTextModule } from 'primeng/primeng';
+import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,CalendarModule,InputTextModule,FileUploadModule } from 'primeng/primeng';
 @NgModule({
     imports: [
         CommonModule,
@@ -18,7 +18,8 @@ import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,
         ButtonModule,
         DropdownModule,
         CalendarModule,
-        InputTextModule
+        InputTextModule,
+        FileUploadModule
     ],
     declarations: [TablesComponent]
 })

@@ -30,6 +30,10 @@ export class TablesComponent implements OnInit {
     employees: Employee[];
 
     cols: any[];
+
+    msgs: Message[];
+    
+    //uploadedFiles: any[] = [];
     
     empDate: Date;
     constructor(private employeeService: EmployeeService) { }
@@ -49,7 +53,6 @@ export class TablesComponent implements OnInit {
             {field: 'mobile', header: 'mobile'},
             {field: 'address', header: 'address'},
             {field: 'bgroup', header: 'bgroup'},
-            {field: 'image', header: 'image'},
             {field: 'designation', header: 'designation'},
             {field: 'exp', header: 'exp'},
             {field: 'pan_no', header: 'PAN'},
@@ -57,7 +60,17 @@ export class TablesComponent implements OnInit {
         ];
     }
     
+    onBasicUpload(event) {
     
+        this.msgs = [];
+        this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
+    }
+
+    onBeforeBasicUpload(event){
+      event.formData.append("details",JSON.stringify(this.employee));
+      //event.formData.append("empId",this.employee.empId);  
+    }
+
     showDialogToAdd() {
         this.newEmployee = true;
         this.employee = new PrimeEmployee();
@@ -73,7 +86,7 @@ export class TablesComponent implements OnInit {
         }
         else{
             employees[this.findSelectedCarIndex()] = this.employee;
-            this.employeeService.addEmployee(this.employee);
+            this.employeeService.updateEmployee(this.employee);
         }
         
         this.employees = employees;
@@ -84,6 +97,7 @@ export class TablesComponent implements OnInit {
     delete() {
         let index = this.findSelectedCarIndex();
         this.employees = this.employees.filter((val,i) => i!=index);
+        this.employeeService.deleteEmployee(this.employee);
         this.employee = null;
         this.displayDialog = false;
     }    
@@ -114,6 +128,11 @@ class PrimeEmployee implements Employee {
     
 }
 
+interface Message{
+    severity?;
+    summary?;
+    detail?;
+}
 /*
  import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
