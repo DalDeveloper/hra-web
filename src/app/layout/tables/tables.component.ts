@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Employee } from '../../interfaces/employee';
 import {EmployeeService} from '../../services/employee.service';
+import {DomSanitizer} from '@angular/platform-browser';
 @Component({
     templateUrl: './tables.component.html',
     styleUrls: ['./tables.component.scss'],
@@ -33,10 +34,11 @@ export class TablesComponent implements OnInit {
 
     msgs: Message[];
     
+    imageUrl: any[];
     //uploadedFiles: any[] = [];
     
     empDate: Date;
-    constructor(private employeeService: EmployeeService) { }
+    constructor(public _DomSanitizer: DomSanitizer, private employeeService: EmployeeService) { }
 
     ngOnInit() {
         this.employeeService.getEmployeeList().then(employees => this.employees = employees);
@@ -61,7 +63,10 @@ export class TablesComponent implements OnInit {
     }
     
     onBasicUpload(event) {
-    
+        let employees = [...this.employees];
+        this.imageUrl = JSON.parse(event.xhr.response).data.image;
+        this.employee.image = this.imageUrl;
+        employees[this.findSelectedCarIndex()] = this.employee;
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }

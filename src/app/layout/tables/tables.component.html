@@ -21,8 +21,8 @@
     
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="employee">
         <div class="ui-grid-row">
-            <div class="ui-grid-col-8"><img src="http://localhost:4200/assets/images/he.jpg" alt="" width="150" height="150"></div>
-            <div class="ui-grid-col-4"><p-fileUpload mode="basic" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)"></p-fileUpload></div>
+            <div class="ui-grid-col-8"><img [src]="employee.image" alt="" width="150" height="150"></div>
+            <div class="ui-grid-col-4"><p-fileUpload mode="basic" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="10000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)"></p-fileUpload></div>
         </div>
         <hr>
         <div class="ui-grid-row">
