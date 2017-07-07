@@ -35,31 +35,41 @@ export class TablesComponent implements OnInit {
     msgs: Message[];
     
     imageUrl: any[];
-    //uploadedFiles: any[] = [];
+    
+    displayImageBox: boolean;
+    
+    date1: Date;
     
     empDate: Date;
+
+    genderOptions: any[];
+    statusOptions: any[];
+
     constructor(public _DomSanitizer: DomSanitizer, private employeeService: EmployeeService) { }
 
     ngOnInit() {
         this.employeeService.getEmployeeList().then(employees => this.employees = employees);
 
         this.cols = [
-            {field: 'empId', header: 'empId'},
-            {field: 'name', header: 'name'},
-            {field: 'surname', header: 'surname'},
-            {field: 'gender', header: 'gender'},
-            {field: 'dob', header: 'dob'},
-            {field: 'doj', header: 'doj'},
-            {field: 'age', header: 'age'},
-            {field: 'email', header: 'email'},
-            {field: 'mobile', header: 'mobile'},
-            {field: 'address', header: 'address'},
-            {field: 'bgroup', header: 'bgroup'},
-            {field: 'designation', header: 'designation'},
-            {field: 'exp', header: 'exp'},
+            {field: 'empId', header: 'ID'},
+            {field: 'name', header: 'Name'},
+            {field: 'surname', header: 'Surname'},
+            {field: 'gender', header: 'Gender'},
+            {field: 'dob', header: 'DOB'},
+            {field: 'doj', header: 'DOJ'},
+            {field: 'age', header: 'Age'},
+            {field: 'email', header: 'Email'},
+            {field: 'mobile', header: 'Mobile'},
+            {field: 'address', header: 'Address'},
+            {field: 'bgroup', header: 'Blood Gr.'},
+            {field: 'designation', header: 'Designation'},
+            {field: 'exp', header: 'Exp'},
             {field: 'pan_no', header: 'PAN'},
-            {field: 'status', header: 'status'}
+            {field: 'status', header: 'Status'}
         ];
+
+        this.genderOptions = [{label: 'Male', value: 'M'}, {label: 'Female', value: 'F'}, {label: 'Other', value: 'O'}];
+        this.statusOptions = [{label: 'Active', value: 'Active'}, {label: 'Inactive', value: 'Inactive'}, {label: 'On Leave', value: 'On Leave'}];
     }
     
     onBasicUpload(event) {
@@ -67,6 +77,7 @@ export class TablesComponent implements OnInit {
         this.imageUrl = JSON.parse(event.xhr.response).data.image;
         this.employee.image = this.imageUrl;
         employees[this.findSelectedCarIndex()] = this.employee;
+        this.employees = employees;
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
@@ -80,7 +91,9 @@ export class TablesComponent implements OnInit {
         this.newEmployee = true;
         this.employee = new PrimeEmployee();
         this.displayDialog = true;
+        this.displayImageBox = false;
     }
+    
     
     save() {
         let employees = [...this.employees];
@@ -110,7 +123,9 @@ export class TablesComponent implements OnInit {
     onRowSelect(event) {
         this.newEmployee = false;
         this.employee = this.cloneCar(event.data);
+        this.displayImageBox = true;
         this.displayDialog = true;
+        
     }
     
     cloneCar(e: Employee): Employee {

@@ -20,50 +20,54 @@
 <p-dialog header="Employee Details" [contentStyle]="{'overflow':'scroll-y'}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
     
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="employee">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-8"><img [src]="employee.image" alt="" width="150" height="150"></div>
-            <div class="ui-grid-col-4"><p-fileUpload mode="basic" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="10000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)"></p-fileUpload></div>
+        <div class="ui-grid-row" *ngIf="displayImageBox">
+            <div class="ui-grid-col-6 imageContainer"><img [src]="employee.image" alt="" width="150" height="150"></div>
+            <div class="ui-grid-col-6"><p-fileUpload mode="basic" chooseLabel="Choose" styleClass="upload-pic-btn" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="10000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)">
+                <div id="dropZone">Drop files here</div>
+            </p-fileUpload>
+            </div>
+           
         </div>
-        <hr>
+         <hr>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="empId">Emp Id</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="empId" [(ngModel)]="employee.empId" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="empId" [(ngModel)]="employee.empId" disabled="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="year">Name</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="employee.name" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="employee.name" [required]="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="surname">Surname</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="surname" [(ngModel)]="employee.surname" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="surname" [(ngModel)]="employee.surname" [required]="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="gender">Gender</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="gender" [(ngModel)]="employee.gender" /></div>
+            <div class="ui-grid-col-8"><p-dropdown [options]="genderOptions" id="gender" [(ngModel)]="employee.gender" [filter]="false" [required]="true"></p-dropdown></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="dob">DOB</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="dob" [(ngModel)]="employee.dob" /></div>
+            <div class="ui-grid-col-8"><p-calendar  id="dob" dataType="string" [(ngModel)]="employee.dob" dateFormat="yy-mm-dd"></p-calendar></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="doj">DOJ</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="doj" [(ngModel)]="employee.doj" /></div>
+            <div class="ui-grid-col-8"><p-calendar  id="doj" dataType="string" [(ngModel)]="employee.doj" dateFormat="yy-mm-dd"></p-calendar></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="age">Age</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="age" [(ngModel)]="employee.age" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="age" [(ngModel)]="employee.age" disabled="true"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="mobile">Mobile</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="mobile" [(ngModel)]="employee.mobile" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="mobile" [(ngModel)]="employee.mobile" [required]="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="address">Address</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="address" [(ngModel)]="employee.address" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="address" [(ngModel)]="employee.address" [required]="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="bgroup">Bgroup</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="bgroup" [(ngModel)]="employee.bgroup" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="bgroup" [(ngModel)]="employee.bgroup" [required]="true" /></div>
         </div>
         <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="image">Image</label></div>
@@ -71,11 +75,11 @@
         </div>-->
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="designation">Designation</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="designation" [(ngModel)]="employee.designation" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="designation" [(ngModel)]="employee.designation" [required]="true" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="exp">Experience</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="exp" [(ngModel)]="employee.exp" /></div>
+            <div class="ui-grid-col-8"><p-spinner size="30" id="exp" [(ngModel)]="employee.exp" [min]="0" [max]="60"></p-spinner></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="pan">PAN</label></div>
@@ -83,7 +87,7 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="status">Status</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="status" [(ngModel)]="employee.status" /></div>
+            <div class="ui-grid-col-8"><p-dropdown [options]="statusOptions" id="status" [(ngModel)]="employee.status" [filter]="false" [required]="true"></p-dropdown></div>
         </div>
 
     </div>

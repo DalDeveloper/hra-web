@@ -5,7 +5,7 @@ import { FormsModule }   from '@angular/forms';
 import { TablesComponent } from './tables.component';
 import { TablesRoutingModule } from './tables-routing.module';
 import { PageHeaderModule } from './../../shared';
-import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,CalendarModule,InputTextModule,FileUploadModule } from 'primeng/primeng';
+import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,CalendarModule,InputTextModule,FileUploadModule,SpinnerModule } from 'primeng/primeng';
 @NgModule({
     imports: [
         CommonModule,
@@ -19,7 +19,8 @@ import { DataTableModule,SharedModule, DialogModule,ButtonModule,DropdownModule,
         DropdownModule,
         CalendarModule,
         InputTextModule,
-        FileUploadModule
+        FileUploadModule,
+        SpinnerModule
     ],
     declarations: [TablesComponent]
 })
