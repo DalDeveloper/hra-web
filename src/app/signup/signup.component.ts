@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 //import { FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -10,7 +11,14 @@ import { AuthProvider } from '../../providers/auth/auth';
     animations: [routerTransition()]
 })
 export class SignupComponent implements OnInit {
-  constructor(){}
+  
+  email: string;
+  password: string;
+
+  constructor(public authData: AuthProvider, public router: Router){
+    this.email = 'jyotimoi.ghosh@digitalavenues.com';
+    this.password = 'admin123';
+  }
    // public signupForm:FormGroup;
     //constructor(public authData: AuthProvider, public formBuilder: FormBuilder) {
 
@@ -21,15 +29,16 @@ export class SignupComponent implements OnInit {
 
     
   //}
-   /*signupUser(){
-    alert("Hello");
-     this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.password)
-      .then(() => {
-        console.log('success');
+   signupUser(){
+   
+     this.authData.signupUser(this.email, this.password)
+      .then((value) => { console.log(value);
+        console.log('success dev');
+        this.router.navigate(['/dashboard']);
       }, (error) => {
         console.log('failed');
       })
-   }*/
+   }
 
     ngOnInit() { }
 }

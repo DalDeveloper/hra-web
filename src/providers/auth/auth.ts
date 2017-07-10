@@ -5,8 +5,12 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthProvider {
-
-  constructor(public afAuth: AngularFireAuth) {}
+  user: Observable<firebase.User>;
+  
+  constructor(public afAuth: AngularFireAuth) {
+    //this.user = afAuth.authState;
+    
+  }
 
   loginUser(newEmail: string, newPassword: string): firebase.Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(newEmail, newPassword);
@@ -23,5 +27,6 @@ export class AuthProvider {
   signupUser(newEmail: string, newPassword: string): firebase.Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(newEmail, newPassword);
   }
+
 
 }

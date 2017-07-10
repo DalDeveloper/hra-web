@@ -15,6 +15,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthProvider } from '../providers/auth/auth';
+ 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
 //     for development

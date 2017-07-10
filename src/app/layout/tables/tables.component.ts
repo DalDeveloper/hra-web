@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Employee } from '../../interfaces/employee';
-import {EmployeeService} from '../../services/employee.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import { EmployeeService } from '../../services/employee.service';
+import { DomSanitizer} from '@angular/platform-browser';
 @Component({
     templateUrl: './tables.component.html',
     styleUrls: ['./tables.component.scss'],

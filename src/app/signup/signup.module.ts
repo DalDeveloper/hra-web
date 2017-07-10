@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
