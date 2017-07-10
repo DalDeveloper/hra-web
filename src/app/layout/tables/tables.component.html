@@ -7,8 +7,14 @@
                    Employees:
                 </div>
                 <div class="card-block table-responsive">
-                   <p-dataTable [value]="employees" selectionMode="single" [(selection)]="selectedEmployee" (onRowSelect)="onRowSelect($event)" scrollable="true" resizableColumns="true" columnResizeMode="expand" [rows]="30" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+                    <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+                </div>
+                   <p-dataTable [value]="employees" selectionMode="single" [(selection)]="selectedEmployee" (onRowSelect)="onRowSelect($event)" scrollable="true" resizableColumns="true" columnResizeMode="expand" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"  [globalFilter]="gb" #dt>
+                        <p-column [sortable]="true" *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+                        
+                        
                    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
                    </p-dataTable>
                 </div>
@@ -22,7 +28,7 @@
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="employee">
         <div class="ui-grid-row" *ngIf="displayImageBox">
             <div class="ui-grid-col-6 imageContainer"><img [src]="employee.image" alt="" width="150" height="150"></div>
-            <div class="ui-grid-col-6"><p-fileUpload mode="basic" chooseLabel="Choose" styleClass="upload-pic-btn" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="10000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)">
+            <div class="ui-grid-col-6"><p-fileUpload mode="basic" chooseLabel="Chnage Image" styleClass="upload-pic-btn" name="image" url="http://localhost:8080/api/v1/upload" method="PUT" accept="image/*" maxFileSize="10000000" (onUpload)="onBasicUpload($event)" (onBeforeUpload)="onBeforeBasicUpload($event)">
                 <div id="dropZone">Drop files here</div>
             </p-fileUpload>
             </div>
@@ -43,19 +49,23 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="gender">Gender</label></div>
-            <div class="ui-grid-col-8"><p-dropdown [options]="genderOptions" id="gender" [(ngModel)]="employee.gender" [filter]="false" [required]="true"></p-dropdown></div>
+            <div class="ui-grid-col-8"><p-dropdown [options]="genderOpt" id="gender" placeholder="Select" [(ngModel)]="employee.gender" [filter]="false" [required]="true"></p-dropdown></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="dob">DOB</label></div>
-            <div class="ui-grid-col-8"><p-calendar  id="dob" dataType="string" [(ngModel)]="employee.dob" dateFormat="yy-mm-dd"></p-calendar></div>
+            <div class="ui-grid-col-8"><p-calendar  id="dob" dataType="string" [(ngModel)]="employee.dob" dateFormat="yy-mm-dd" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2030" [minDate]="minDateDOB" [minDate]="maxDateDOB" (onSelect)="calculateAge($event)"></p-calendar></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="doj">DOJ</label></div>
-            <div class="ui-grid-col-8"><p-calendar  id="doj" dataType="string" [(ngModel)]="employee.doj" dateFormat="yy-mm-dd"></p-calendar></div>
+            <div class="ui-grid-col-8"><p-calendar  id="doj" dataType="string" [(ngModel)]="employee.doj" dateFormat="yy-mm-dd" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2030"></p-calendar></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="age">Age</label></div>
             <div class="ui-grid-col-8"><input pInputText id="age" [(ngModel)]="employee.age" disabled="true"/></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="age">Email</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="email" [(ngModel)]="employee.email" disabled="true"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="mobile">Mobile</label></div>

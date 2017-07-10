@@ -38,16 +38,31 @@ export class TablesComponent implements OnInit {
     
     displayImageBox: boolean;
     
-    date1: Date;
-    
     empDate: Date;
+    
+    minDateDOB: Date;
+    minDateDOJ: Date;
+    maxDateDOJ: Date;
+    maxDateDOB: Date;
+    
 
-    genderOptions: any[];
+    genderOpt: genderOptions[];
     statusOptions: any[];
 
     constructor(public _DomSanitizer: DomSanitizer, private employeeService: EmployeeService) { }
 
     ngOnInit() {
+        let today = new Date();
+        let month = today.getMonth();
+        let year = today.getFullYear();
+        
+        this.minDateDOB = new Date();
+        this.minDateDOB.setFullYear(year - 60);
+        
+        this.maxDateDOB = new Date();
+        this.maxDateDOB.setFullYear(year - 18);
+
+
         this.employeeService.getEmployeeList().then(employees => this.employees = employees);
 
         this.cols = [
@@ -68,7 +83,7 @@ export class TablesComponent implements OnInit {
             {field: 'status', header: 'Status'}
         ];
 
-        this.genderOptions = [{label: 'Male', value: 'M'}, {label: 'Female', value: 'F'}, {label: 'Other', value: 'O'}];
+        this.genderOpt = [{label: 'Male', value: 'Male'}, {label: 'Female', value: 'Female'}, {label: 'Others', value: 'Others'}];
         this.statusOptions = [{label: 'Active', value: 'Active'}, {label: 'Inactive', value: 'Inactive'}, {label: 'On Leave', value: 'On Leave'}];
     }
     
@@ -94,23 +109,35 @@ export class TablesComponent implements OnInit {
         this.displayImageBox = false;
     }
     
-    
     save() {
         let employees = [...this.employees];
         
         if(this.newEmployee){ 
             employees.push(this.employee);
-            this.employeeService.addEmployee(this.employee);
+            this.employeeService.addEmployee(this.employee)
+            .then((employee) => {
+                this.employee.empId = employee.empId;
+                this.employee.image = employee.image;   
+                employees[this.findSelectedCarIndex()] = this.employee;
+                this.employees = employees;
+                this.employee = null;
+                this.displayDialog = false;
+           });
         }
         else{
-            employees[this.findSelectedCarIndex()] = this.employee;
-            this.employeeService.updateEmployee(this.employee);
+           this.employeeService.updateEmployee(this.employee)
+           .then((employee) => {
+              this.employee.empId = employee.empId;   
+                employees[this.findSelectedCarIndex()] = this.employee;
+                this.employees = employees;
+                this.employee = null;
+                this.displayDialog = false;
+           });
         }
         
-        this.employees = employees;
-        this.employee = null;
-        this.displayDialog = false;
+        
     }
+    
     
     delete() {
         let index = this.findSelectedCarIndex();
@@ -139,6 +166,18 @@ export class TablesComponent implements OnInit {
     findSelectedCarIndex(): number { 
         return this.employees.indexOf(this.selectedEmployee);
     }
+
+    calculateAge(selectedDate){ 
+        console.log(selectedDate);
+         let employees = [...this.employees];
+         let ageDifMs = Date.now() - selectedDate.getTime();
+         let ageDate = new Date(ageDifMs); // miliseconds from epoch 
+         let actualDate =  Math.abs(ageDate.getUTCFullYear() - 1970);
+         this.employee.age = actualDate || 0;
+         
+
+    }
+    
 }
  
 
@@ -153,57 +192,8 @@ interface Message{
     summary?;
     detail?;
 }
-/*
- import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../router.animations';
-import { Employee } from '../../interfaces/employee';
-import {EmployeeService} from '../../services/employee.service';
-@Component({
-    templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.scss'],
-    animations: [routerTransition()],
-    providers: [EmployeeService]
-})
-export class TablesComponent implements OnInit {
-    loading: boolean;
 
-    employees: Employee[];
-    
-    cols: any[];
-    
-    constructor(private EmployeeService: EmployeeService) { }
-
-    ngOnInit() {
-        //this.loading = true;
-        //setTimeout(() => {
-          //  this.EmployeeService.getEmployeeList().then(employees => this.employees = employees);
-           // this.loading = false;
-        //}, 1000);
-        
-        this.EmployeeService.getEmployeeList().then(employees => this.employees = employees);
-        console.log(this.employees);
-        this.cols = [
-            {field: 'empId', header: 'empId'},
-            {field: 'name', header: 'name'},
-            {field: 'surname', header: 'surname'},
-            {field: 'gender', header: 'gender'},
-            {field: 'dob', header: 'dob'},
-            {field: 'doj', header: 'doj'},
-            {field: 'age', header: 'age'},
-            {field: 'email', header: 'email'},
-            {field: 'mobile', header: 'mobile'},
-            {field: 'address', header: 'address'},
-            {field: 'bgroup', header: 'bgroup'},
-            {field: 'image', header: 'image'},
-            {field: 'designation', header: 'designation'},
-            {field: 'exp', header: 'exp'},
-            {field: 'pan_no', header: 'PAN'},
-            {field: 'status', header: 'status'}
-        ];
-        
-
-        
-    }
+interface genderOptions{
+    label: String;
+    value: String;
 }
-
- */

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,6 +10,11 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { CalendarModule} from 'primeng/primeng';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { AuthProvider } from '../providers/auth/auth';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
 //     for development
@@ -28,6 +33,9 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -36,7 +44,7 @@ export function HttpLoaderFactory(http: Http) {
             }
         })
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, AuthProvider],
     bootstrap: [AppComponent]
 })
 export class AppModule {

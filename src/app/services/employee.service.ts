@@ -22,7 +22,7 @@ export class EmployeeService {
                     .then(data => { return data; });
     }
 
-    addEmployee(employee: Employee): Promise <Employee> {console.log(employee);
+    addEmployee(employee: Employee): Promise <Employee> {
         let bodyString = JSON.stringify(employee); // Stringify payload
         
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -34,7 +34,7 @@ export class EmployeeService {
                 .then(data => { return data; });       
     } 
     
-    updateEmployee(employee: Employee): Promise <Employee> {console.log(employee);
+    updateEmployee(employee: Employee): Promise <Employee> {
         let bodyString = JSON.stringify(employee); // Stringify payload
         
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
