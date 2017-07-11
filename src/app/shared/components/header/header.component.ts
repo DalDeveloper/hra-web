@@ -9,13 +9,16 @@ import { AuthProvider } from '../../../../providers/auth/auth';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+    displayName: any;
     constructor(public authData: AuthProvider, private translate: TranslateService, public router: Router) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992) {
                 this.toggleSidebar();
             }
         });
+
+        let currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
+        this.displayName = currentUser.displayName;
     }
 
     ngOnInit() {}
@@ -33,7 +36,7 @@ export class HeaderComponent implements OnInit {
     onLoggedout() {
         this.authData.logoutUser().then(()=>{
              console.log('logged out');
-             localStorage.removeItem('isLoggedin');
+             localStorage.removeItem('currentUser');
         });
        
     }

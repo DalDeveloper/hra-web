@@ -19,13 +19,21 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
     }
-
+    
     onLoggedin() {
     
     this.authData.loginUser(this.email, this.password)
-      .then((value) => {
-        this.email = this.password = '';
-        localStorage.setItem('isLoggedin', 'true');
+      .then((res) => {
+        console.log("Login success" + JSON.stringify(res));
+        let currentUser = {
+          email: res.email,
+          picture: res.photoURL,
+          displayName: res.displayName || 'Admin'
+        };
+
+        window.localStorage.setItem('currentUser',JSON.stringify(currentUser));
+        this.router.navigate(['/dashboard']);
+      
       }, (error) => {
         console.log('failed');
       })
