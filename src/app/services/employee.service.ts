@@ -13,7 +13,7 @@ export class EmployeeService {
 
   constructor(private http: Http) {}
      // private instance variable to hold base url
-     private apiBaseUrl = 'http://localhost:8080/api/v1/employees/'; 
+     private apiBaseUrl ='http://localhost:8080/api/v1/employees/'; //'http://localhost:8080/api/v2/employee';
 
     getEmployeeList() {
         return this.http.get(this.apiBaseUrl)
