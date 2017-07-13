@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
        // this.email = 'jyotimoi.ghosh@digitalavenues.com';
         //this.password = 'admin123';
     }
+    hasError = false;
 
     ngOnInit() {
     }
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
       
       }, (error) => {
         console.log('failed');
+        this.hasError = true;
       })
     }
 

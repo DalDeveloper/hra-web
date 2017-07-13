@@ -1,19 +1,9 @@
 <div [@routerTransition]>
-    <div class="row">
-        <div class="col-md-12">
-            <ngb-carousel>
-                <ng-template ngbSlide *ngFor="let slider of sliders">
-                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
-                    <div class="carousel-caption">
-                        <h3>{{slider.label}}</h3>
-                        <p>{{slider.text}}</p>
-                    </div>
-                </ng-template>
-            </ngb-carousel>
-        </div>
+    <div class="bannerImg">
+        <img src="/assets/images/slider1.png" alt="banner">            
     </div>
     <hr>
-    <div class="row">
+    <div class="row" class="dashboardTitle">
     
         <div class="col-xl-12 text-xs-center">
             <h3>Project Introduction</h3><br>
@@ -25,7 +15,7 @@
         
     </div>
     <hr>
-    <div class="row">
+    <div class="row dashboardWrap">
         <div class="col-xl-4 text-xs-center">
             <div class="card mb-3">
                 <div class="card-header card-default">
@@ -50,12 +40,12 @@
                 </div>
                 <div class="card-block">
                   <ul class="list-group">
-                    <li class="list-group-item"><a href="#" target="_blank">Link1</a></li>
-                    <li class="list-group-item"><a href="#" target="_blank">Link2</a></li>
-                    <li class="list-group-item"><a href="#" target="_blank">Link3</a></li>
-                    <li class="list-group-item"><a href="#" target="_blank">Link4</a></li>
-                    <li class="list-group-item"><a href="#" target="_blank">Link5</a></li>
-                    <li class="list-group-item"><a href="#" target="_blank">Link6</a></li>
+                    <li class="list-group-item"><a href="https://www.tutorialspoint.com/nodejs/" target="_blank">Tutorials Point</a></li>
+                    <li class="list-group-item"><a href="https://www.w3schools.com/nodejs/" target="_blank">w3schools</a></li>
+                    <li class="list-group-item"><a href="https://hackr.io/tutorials/learn-node-js" target="_blank">hackr.io</a></li>
+                    <li class="list-group-item"><a href="https://angular.io/tutorial" target="_blank">Angular Io</a></li>
+                    <li class="list-group-item"><a href="http://scottksmith.com/blog/2014/07/02/beer-locker-building-a-restful-api-with-node-oauth2-server" target="_blank">REST Api with OAuth</a></li>
+                    <li class="list-group-item"><a href="https://scotch.io/tutorials/easy-node-authentication-setup-and-local" target="_blank">Authentication with passport</a></li>
                   </ul>
                 </div>
             </div>
@@ -68,10 +58,10 @@
                 </div>
                 <div class="card-block">
                   <ul class="list-group">
+                    <li class="list-group-item">Suvendu Banik (Our Mentor)</li>
                     <li class="list-group-item">Subhomita Mazumder</li>
                     <li class="list-group-item">Anupam Halder</li>
                     <li class="list-group-item">Subhasish Bose</li>
-                    <li class="list-group-item">...</li>
                     <li class="list-group-item">...</li>
                     <li class="list-group-item">...</li>
                   </ul>

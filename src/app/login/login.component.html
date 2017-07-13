@@ -1,7 +1,7 @@
 <div class="login-page" [@routerTransition]>
     <div class="row">
         <div class="col-md-4 push-md-4">
-            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <img src="assets/images/logo.png" width="150px" class="" />
             <h1>HRA - Admin</h1>
             <form role="form">
                 <div class="form-content">
@@ -13,9 +13,10 @@
                         <input type="password" class="form-control input-underline input-lg" id="" [(ngModel)]="password" name="password" placeholder="Password">
                     </div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onLoggedin()"> Log in </a>
-                &nbsp;
-                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+               <div *ngIf="hasError" class="alert alert-danger">Invalid username or password.</div>
+                <a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onLoggedin()">Login to Dashboard &nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+               <!-- &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>-->
             </form>
         </div>
     </div>
